@@ -20,7 +20,7 @@ class SeriesController extends BaseController
     }
 
     /* Index com paginação*/
-    public function index2(Request $request){
+    public function paginador(Request $request){
 
         $series = $this->classeService->findAllPorPagina($request->page, $request->per_page);
             //->makeHidden(['created_at', 'updated_at'])->toArray();

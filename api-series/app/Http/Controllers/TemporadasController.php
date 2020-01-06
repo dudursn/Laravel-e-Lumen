@@ -44,5 +44,15 @@ class TemporadasController extends BaseController
         return response()->json($temporada);
         
     }
+
+    public function buscaPorSerie(int $serieId){
+
+        $temporadas = $this->classeService->findTemporadaBySerieId($serieId, true, false);
+        if(is_null($temporadas)){
+
+            return response()->json('', 204);
+        }
+        return response()->json($temporadas);
+    }
     
 }

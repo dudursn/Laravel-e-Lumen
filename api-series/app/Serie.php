@@ -19,12 +19,22 @@ class Serie extends Model{
     //Define quais atributos são preenchíveis
     protected $fillable = ["nome"];
 
+    //Define atributos extras
+    protected $appends = ["links"];
+
     //Relacionamento OneToMany - Uma série tem muitas temporadas
     public function temporadas(){
 
         return $this->hasMany(Temporada::class, 'temporada_id', 'temporada_id');
     }
         
+    public function getLinksAttribute($links) : array {
+
+        return [
+            "self" => "/api/series/" . $this->serie_id,
+            "episodios" => "/api/series/" . $this->serie_id . "/episodios"
+        ];
+    }
 
     /*
         Indicates if the model should be timestamped.
@@ -34,6 +44,10 @@ class Serie extends Model{
     /*  If your primary key is not an integer,
         you should set the protected $keyType property on your model to string:
     protected $keyType = 'string';
+    */
+
+     /*  Para paginação(O padrão é 15)
+    protected $perPage = 3;
     */
 
 

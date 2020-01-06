@@ -112,6 +112,17 @@ class TemporadaService{
         return $temporada;
     }
 
+    public function findTemporadaBySerieId(int $serieId, $completo, $carregarColecao){
+
+        $temporadas = Temporada::where("serie_id", "=", $serieId)->get();
+
+        $temporadas->each(function(Temporada $temporada) use ($completo, $carregarColecao){
+
+            $temporada = $this->carregarDados($temporada, $completo, $carregarColecao);          
+        });
+        return $temporadas;
+    }
+
     private function carregarDados($temporada, $completo, $carregarColecao= false){
        
         if($temporada!=null){

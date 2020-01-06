@@ -27,14 +27,17 @@ $router->get('/series', function(){
 $router->group(["prefix" => "api"], function() use($router){
     $router->group(["prefix" => "series"], function() use($router){
         /* Sem paginacao */
-        //$router->get("", "SeriesController@index");
-
+        $router->get("", "SeriesController@index");
         /* Com paginacao */
-        $router->get("", "SeriesController@index2");
+        $router->get("paginador", "SeriesController@paginador");
+
         $router->get("{id}", "SeriesController@show");
         $router->post("", "SeriesController@store");
         $router->put("{id}", "SeriesController@update");
         $router->delete("{id}", "SeriesController@destroy");
+
+        //Subrecursos
+        $router->get("{serieId}/episodios", "TemporadasController@buscaPorSerie");
     });
 
     $router->group(["prefix" => "temporadas"], function() use($router){
