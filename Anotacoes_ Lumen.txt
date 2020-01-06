@@ -1,0 +1,47 @@
+API com Lumen/Laravel
+
+Habilitar o Eloquent
+    No arquivo bootstrapp/app.php descomentar $app->withEloquent();
+
+Criando uma rota
+   
+    $router->get('/series', function(){
+        return [
+            "Grey's Anatomy",
+            "Flash"
+        ];
+    });
+
+    //Grupo de rotas 
+        Fica /api/ para todas as rotas abaixo
+            $router->group(["prefix" => "/api"], function() use($router){
+                $router->get('/series', "SeriesController@index"); - nomedosite/api/series 
+                $router->get('/filmes', "FilmesController@index"); - nomedosite/api/filmes 
+            });
+        Fica /api-futebol/ para todas as rotas abaixo
+         $router->group(["prefix" => "/api-futebol"], function() use($router){
+            $router->get('/times', "TimesController@index"); - nomedosite/api-futebol/times 
+        });
+
+Metodos HTTP
+
+    GET /series - pegar todas
+    GET /series/:id - pegar uma específica
+    POST /series - inserir
+    PUT /series/:id - atualizar
+    DELETE /series/:id - deletar específica
+
+POST
+    Exemplo:
+    Na web.php: $router->post("/series", "SeriesController@store");
+    Nocontroller:
+    public function store(SeriesFormRequest $request, SerieService $serieService){
+	
+        return response()
+            ->json(
+                $serieService->criarSerie(
+                    $request->nome, $request->qtd_temporadas, $request->eps_por_temporada
+                ),
+                201
+            );
+    }
