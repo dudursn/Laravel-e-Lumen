@@ -28,7 +28,7 @@ class Serie extends Model{
         return $this->hasMany(Temporada::class, 'temporada_id', 'temporada_id');
     }
         
-    public function getLinksAttribute($links) : array {
+    public function getLinksAttribute() : array {
 
         return [
             "self" => "/api/series/" . $this->serie_id,

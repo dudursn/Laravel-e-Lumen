@@ -270,3 +270,20 @@ Para se aprofundar mais nesse tema, recomendo fortemente os cursos de DevOps da 
 principal o que aborda Jenkins. Você pode, inclusive, no seu processo de deploy,
 fazer com que o Jenkins rode todos os testes, garantindo que a aplicação esteja 
 funcionando no momento de colocá-la em produção.
+
+Seeders bd
+	Util para inserir no BD sem comandos sql
+	Ex.:
+	> php artisan make:seeder UserSeeder
+	Criar na funcao run()
+		User::create([
+            "name" => "TesteUser",
+            "email" => "teste@teste.com",
+            "password" => Hash::make("teste")
+        ]);
+
+	Utilizar o metodo call com o nome da Classe Seeder em DatabaseSeeder.php
+		// $this->call('UserSeeder');
+
+	Executar a seeder
+		> php artisan db:seed
