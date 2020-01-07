@@ -24,7 +24,8 @@ $router->get('/series', function(){
 });
 */
 //Grupo de rotas
-$router->group(["prefix" => "api", "middleware" => "auth"], function() use($router){
+//$router->group(["prefix" => "api", "middleware" => "auth"], function() use($router){
+$router->group(["prefix" => "api", "middleware" => "meu_autenticador"], function() use($router){
     $router->group(["prefix" => "series"], function() use($router){
         /* Sem paginacao */
         $router->get("", "SeriesController@index");
